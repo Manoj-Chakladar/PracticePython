@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from flask_wtf.recaptcha import validators
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
@@ -47,6 +48,9 @@ class UpdateAccountForm(FlaskForm):
     )
     email = StringField(
         "Email", validators=[DataRequired(), Email(), Length(min=2, max=50)]
+    )
+    picture = FileField(
+        "Update Profile Picture", validators=[FileAllowed(["jpg", "png"])]
     )
     submit = SubmitField("Update")
 
